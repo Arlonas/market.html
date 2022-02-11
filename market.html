@@ -1,115 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <title>Document</title>
-</head>
-<body class="container">
-  <table class="table text-center">
-    <thead>
-      <tr>
-        <th>Product Image</th>
-        <th>Product Name</th>
-        <th>Price</th>
-        <th>Stock</th>
-        <th>Quantity in Cart</th>
-        <th colspan="2">Cart Actions</th>
-      </tr>
-    </thead>
-    <tbody id="productList">
-      <tr style="vertical-align: middle;">
-        <td><img  width="100px" src="https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/444b6b8e6d40c8249766694731048fb0b5d22eca_xxl-1.jpg"></td>
-        <td >Premium Cotton T-Shirt</td>
-        <td >Rp 379,900</td>
-        <td>10</td>
-        <td>0</td>
-        <td><button id="decrement"class="btn btn-secondary">-</button></td>
-        <td><button id="increment"class="btn btn-secondary">+</button></td>
-      </tr>
-      <tr style="vertical-align: middle;">
-        <td><img  width="100px" src="https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/fc7f1fa35236905d10b51f655c204eaa4c1bc92a_xxl-1.jpg"></td>
-        <td>Silk Blend Polo Shirt</td>
-        <td>Rp 549,900</td>
-        <td>10</td>
-        <td>0</td>
-        <td><button class="btn btn-secondary">-</button></td>
-        <td><button class="btn btn-secondary">+</button></td>
-      </tr>
-    </tbody>
-  </table>
-  <center>
-    <button class="btn btn-success">Checkout</button>
-    <br>
-    <br>
-    <h3>Total Belanja anda: Rp. 100,000</h3>
-  </center>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body class="container">
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th>Product Image</th>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Quantity in Cart</th>
+          <th colspan="2">Cart Actions</th>
+        </tr>
+      </thead>
+      <tbody id="productList">
+        <tr style="vertical-align: middle">
+          <td>
+            <img
+              width="100px"
+              src="https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/444b6b8e6d40c8249766694731048fb0b5d22eca_xxl-1.jpg"
+            />
+          </td>
+          <td>Premium Cotton T-Shirt</td>
+          <td>Rp 379,900</td>
+          <td>10</td>
+          <td>0</td>
+          <td><button id="decrement" class="btn btn-secondary">-</button></td>
+          <td><button id="increment" class="btn btn-secondary">+</button></td>
+        </tr>
+        <tr style="vertical-align: middle">
+          <td>
+            <img
+              width="100px"
+              src="https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/fc7f1fa35236905d10b51f655c204eaa4c1bc92a_xxl-1.jpg"
+            />
+          </td>
+          <td>Silk Blend Polo Shirt</td>
+          <td>Rp 549,900</td>
+          <td>10</td>
+          <td>0</td>
+          <td><button class="btn btn-secondary">-</button></td>
+          <td><button class="btn btn-secondary">+</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <center>
+      <button onclick="checkout()" class="btn btn-success">Checkout</button>
+      <br />
+      <br />
+      <h3 id="totalPrice">Total Belanja anda: Rp. 100,000</h3>
+    </center>
 
-  <script>
-    class Product {
+    <script>
+      class Product {
         constructor(image, name, prices, stock) {
-             this.image = image
-             this.name = name
-             this.prices = prices
-             this.stock = stock
-             this.quantity = 0
+          this.image = image;
+          this.name = name;
+          this.prices = prices;
+          this.stock = stock;
+          this.quantity = 0;
         }
-    }
-    
-    
-    let product = [
-        new Product("https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/444b6b8e6d40c8249766694731048fb0b5d22eca_xxl-1.jpg",
-        "Premium Cotton T-Shirt", 379900, 10, 0),
-        new Product("https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/fc7f1fa35236905d10b51f655c204eaa4c1bc92a_xxl-1.jpg",
-        "Silk Blend Polo Shirt", 549000, 10, 0)
-    ]
+      }
 
-   
-    const renderData = () => {
+      let product = [
+        new Product(
+          "https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/444b6b8e6d40c8249766694731048fb0b5d22eca_xxl-1.jpg",
+          "Premium Cotton T-Shirt",
+          379900,
+          10,
+          0
+        ),
+        new Product(
+          "https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/fc7f1fa35236905d10b51f655c204eaa4c1bc92a_xxl-1.jpg",
+          "Silk Blend Polo Shirt",
+          549000,
+          10,
+          0
+        ),
+      ];
+
+      const renderData = () => {
         let htmlResult = "";
 
         product.forEach((val, idx) => {
-         
-              htmlResult += `
+          htmlResult += `
               <tr>
                 <td><img width= "100px" src=${val.image}></td>
                 <td>${val.name}</td>
-                <td>Rp. ${val.prices}</td>
+                <td>Rp. ${val.prices.toLocaleString()}</td>
                 <td>${val.stock}</td>
                 <td>${val.quantity}</td>
-                <td><button onclick="removeQuantity()" class="btn btn-secondary">-</button></td>
+                <td><button onclick="reduceQuantity(${idx})" class="btn btn-secondary">-</button></td>
                 <td><button onclick="addQuantity(${idx})" class="btn btn-secondary">+</button></td>
               </tr>
             `;
+        });
 
-          }
-        );
-       
         document.getElementById("productList").innerHTML = htmlResult;
       };
-      renderData()
+      renderData();
 
       const addQuantity = (addIdx) => {
-          product[addIdx].quantity += 1
-          renderData()
+        if (product[addIdx].quantity == 9) {
+          alert("Barang udh mau abis jangan serahkah tolol");
+        } else if (product[addIdx].quantity < product[addIdx].stock) {
+          product[addIdx].quantity += 1;
           
-      }
-    
-      
-     
-        
-             
+        } else if (product[addIdx].quantity >= product[addIdx].stock) {
+          alert("Barang sudah habis jangan serahkah");
+        }
+
+        renderData();
+      };
+
+      const reduceQuantity = (recIdx) => {
+        if (product[recIdx].quantity <= 0) {
+          alert("g bisa lah tolol u masa beli barang - sih pake otak aja lah capek gw");
+        } else if (product[recIdx].quantity > 0) {
+          product[recIdx].quantity -= 1;
+          
+        }
+        renderData();
+      };
+
+      const checkout = () => {
+        let totalPrice = 0
+
+        product.forEach((val ,idx) => {
+          val.stock -= val.quantity
+            totalPrice += val.quantity * val.prices
+
+            val.quantity = 0    
+        })
          
+        let finalPrice = `<h3>Total Belanja anda: Rp. ${totalPrice.toLocaleString()}</h3>`
+        document.getElementById("totalPrice").innerHTML = finalPrice
 
+        renderData()
 
-
-
-
-
-
-
-  </script>
-</body>
+      }
+    </script>
+  </body>
 </html>
