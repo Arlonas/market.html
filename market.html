@@ -19,18 +19,18 @@
         <th colspan="2">Cart Actions</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="productList">
       <tr style="vertical-align: middle;">
-        <td><img width="100px" src="https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/444b6b8e6d40c8249766694731048fb0b5d22eca_xxl-1.jpg"></td>
-        <td>Premium Cotton T-Shirt</td>
-        <td>Rp 379,900</td>
+        <td><img  width="100px" src="https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/444b6b8e6d40c8249766694731048fb0b5d22eca_xxl-1.jpg"></td>
+        <td >Premium Cotton T-Shirt</td>
+        <td >Rp 379,900</td>
         <td>10</td>
         <td>0</td>
-        <td><button class="btn btn-secondary">-</button></td>
-        <td><button class="btn btn-secondary">+</button></td>
+        <td><button id="decrement"class="btn btn-secondary">-</button></td>
+        <td><button id="increment"class="btn btn-secondary">+</button></td>
       </tr>
       <tr style="vertical-align: middle;">
-        <td><img width="100px" src="https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/fc7f1fa35236905d10b51f655c204eaa4c1bc92a_xxl-1.jpg"></td>
+        <td><img  width="100px" src="https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/fc7f1fa35236905d10b51f655c204eaa4c1bc92a_xxl-1.jpg"></td>
         <td>Silk Blend Polo Shirt</td>
         <td>Rp 549,900</td>
         <td>10</td>
@@ -66,7 +66,44 @@
         "Silk Blend Polo Shirt", 549000, 10, 0)
     ]
 
+   
+    const renderData = () => {
+        let htmlResult = "";
+
+        product.forEach((val, idx) => {
+         
+              htmlResult += `
+              <tr>
+                <td><img width= "100px" src=${val.image}></td>
+                <td>${val.name}</td>
+                <td>Rp. ${val.prices}</td>
+                <td>${val.stock}</td>
+                <td>${val.quantity}</td>
+                <td><button onclick="removeQuantity()" class="btn btn-secondary">-</button></td>
+                <td><button onclick="addQuantity(${idx})" class="btn btn-secondary">+</button></td>
+              </tr>
+            `;
+
+          }
+        );
+       
+        document.getElementById("productList").innerHTML = htmlResult;
+      };
+      renderData()
+
+      const addQuantity = (addIdx) => {
+          product[addIdx].quantity += 1
+          renderData()
+          
+      }
     
+      
+     
+        
+             
+         
+
+
 
 
 
