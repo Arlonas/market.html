@@ -49,16 +49,23 @@
 
   <script>
     class Product {
-        constructor(image, name, prices, stock, quantity) {
+        constructor(image, name, prices, stock) {
              this.image = image
              this.name = name
              this.prices = prices
              this.stock = stock
-             this.quantity = quantity
+             this.quantity = 0
         }
     }
     
     
+    let product = [
+        new Product("https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/444b6b8e6d40c8249766694731048fb0b5d22eca_xxl-1.jpg",
+        "Premium Cotton T-Shirt", 379900, 10, 0),
+        new Product("https://d29c1z66frfv6c.cloudfront.net/pub/media/catalog/product/large/fc7f1fa35236905d10b51f655c204eaa4c1bc92a_xxl-1.jpg",
+        "Silk Blend Polo Shirt", 549000, 10, 0)
+    ]
+
     
 
 
